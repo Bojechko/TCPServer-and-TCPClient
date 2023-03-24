@@ -30,7 +30,9 @@ public class TCPServer {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(input));
                     words = reader.readLine().split(" ");
 
-                    if (words[0] == "GUESS"){
+                    if (words[0].equals("GUESS")){
+                        System.out.println(words[0] );
+                        System.out.println(words[1] );
                         if (Integer.parseInt(words[1]) == randomNum) {
                             writer.println("Server: " + "EQUAL");
 
