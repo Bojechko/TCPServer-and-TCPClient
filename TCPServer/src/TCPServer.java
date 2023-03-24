@@ -30,20 +30,25 @@ public class TCPServer {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(input));
                     words = reader.readLine().split(" ");
 
-                    if (Integer.parseInt(words[1]) == randomNum) {
-                        writer.println("Server: " + "EQUAL");
+                    if (words[0] == "GUESS"){
+                        if (Integer.parseInt(words[1]) == randomNum) {
+                            writer.println("Server: " + "EQUAL");
 
-                        randomNum = ThreadLocalRandom.current().nextInt(0, 10);
-                        System.out.println(String.valueOf(randomNum));
+                            randomNum = ThreadLocalRandom.current().nextInt(0, 10);
+                            System.out.println(String.valueOf(randomNum));
+                        }
+
+                        if (Integer.parseInt(words[1]) > randomNum) {
+                            writer.println("Server: " + "MORE");
+                        }
+
+                        if (Integer.parseInt(words[1]) < randomNum) {
+                            writer.println("Server: " + "LESS");
+                        }
+                    } else {
+                        writer.println("Server: " + "wrong command");
                     }
 
-                    if (Integer.parseInt(words[1]) > randomNum) {
-                        writer.println("Server: " + "MORE");
-                    }
-
-                    if (Integer.parseInt(words[1]) < randomNum) {
-                        writer.println("Server: " + "LESS");
-                    }
                 } while (!words[0].equals("bye"));
 
                 socket.close();
